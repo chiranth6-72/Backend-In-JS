@@ -62,7 +62,9 @@ userSchema.methods.isPasswordCorrect = async function (password) {
     return await bcrypt.compare(password, this.password);
 };
 
-userSchema.methods.generateAccessToken = async function () {
+
+// If the below function is defined with async keyword it will return a Promise and not a string
+userSchema.methods.generateAccessToken = function () {
     return jwt.sign(
         {
             _id: this._id,
@@ -77,7 +79,8 @@ userSchema.methods.generateAccessToken = async function () {
     );
 };
 
-userSchema.methods.generateRefreshToken = async function () {
+// If the below function is defined with async keyword it will return a Promise and not a string
+userSchema.methods.generateRefreshToken = function () {
     return jwt.sign(
         {
             _id: this._id,
